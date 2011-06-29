@@ -37,6 +37,8 @@
           <option value="textile">Textile</option>
           <option value="groovy">Groovy</option>
           <option value="scala">Scala</option>
+          <option value="gosu">Gosu</option>
+          <option value="fantom">Fantom</option>
         </select>
       </td>
     </tr>
@@ -66,6 +68,8 @@
           <option value="textile">Textile</option>
           <option value="groovy">Groovy</option>
           <option value="scala">Scala</option>
+          <option value="gosu">Gosu</option>
+          <option value="fantom">Fantom</option>
         </select>
       </td>
     </tr>
@@ -676,6 +680,54 @@ object implicits extends Application {
     }
   val x = Array(2, 3, 1, 4)
   println("x = "+ x.sort((x: Int, y: Int) => x < y))
+}
+</script>
+
+<script type="text/editor" id="gosu">
+//http://gosu-lang.org/
+// Declare some data
+var minLength = 4
+var strings = { "yellow", "red", "blue" }
+
+// Slice and dice the data using blocks
+print( strings.where( \ s -> s.length() >= minLength )
+              .sort()
+              .join( ", " ) )
+
+// Use standard java classes
+var someFile = new java.io.File( "SomeFile.txt" )
+
+// But with shiny new methods
+someFile.write( strings.join( "\n" ) )
+</script>
+
+<script type="text/editor" id="fantom">
+//http://fantom.org/doc/examples/fwt-hello.html
+#! /usr/bin/env fan
+//
+// Copyright (c) 2008, Brian Frank and Andy Frank
+// Licensed under the Academic Free License version 3.0
+//
+// History:
+//   10 Jun 08  Brian Frank  Creation
+//
+
+using gfx
+using fwt
+
+**
+** FwtHello is as simple as it gets
+**
+class FwtHello
+{
+  Void main()
+  {
+    Window
+    {
+      size = Size(300,200)
+      Label { text = "Hello world"; halign=Halign.center },
+    }.open
+  }
 }
 </script>
   <input id="cockpitInput" type="text"/>

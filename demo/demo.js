@@ -70,6 +70,8 @@ exports.launch = function(env) {
     var TextMode = require("ace/mode/text").Mode;
     var GroovyMode = require("ace/mode/groovy").Mode;
     var ScalaMode = require("ace/mode/scala").Mode;
+    var GosuMode = require("ace/mode/gosu").Mode;
+    var FantomMode = require("ace/mode/fantom").Mode;
 
     var UndoManager = require("ace/undomanager").UndoManager;
 
@@ -177,6 +179,14 @@ exports.launch = function(env) {
     docs.scala = new EditSession(document.getElementById("scala").innerHTML);
     docs.scala.setMode(new ScalaMode());
     docs.scala.setUndoManager(new UndoManager());
+    
+    docs.gosu = new EditSession(document.getElementById("gosu").innerHTML);
+    docs.gosu.setMode(new GosuMode());
+    docs.gosu.setUndoManager(new UndoManager());
+    
+    docs.fantom = new EditSession(document.getElementById("fantom").innerHTML);
+    docs.fantom.setMode(new FantomMode());
+    docs.fantom.setUndoManager(new UndoManager());
 
     
     
@@ -222,7 +232,9 @@ exports.launch = function(env) {
         ocaml: new OcamlMode(),
         csharp: new CSharpMode(),
         groovy: new GroovyMode(),
-        scala: new ScalaMode()
+        scala: new ScalaMode(),
+        gosu: new GosuMode(),
+        fantom: new FantomMode()
     };
 
     function getMode() {
@@ -318,6 +330,12 @@ exports.launch = function(env) {
         }
         else if (mode instanceof ScalaMode) {
             modeEl.value = "scala";
+        }
+        else if (mode instanceof GosuMode) {
+            modeEl.value = "gosu";
+        }
+        else if (mode instanceof FantomMode) {
+            modeEl.value = "fantom";
         }
         else {
             modeEl.value = "text";
@@ -524,6 +542,10 @@ exports.launch = function(env) {
                     mode = "groovy";
                 } else if (/^.*\.(scala)$/i.test(file.name)) {
                     mode = "scala";
+                } else if (/^.*\.(gosu)$/i.test(file.name)) {
+                    mode = "gosu";
+                } else if (/^.*\.(fantom)$/i.test(file.name)) {
+                    mode = "fantom";
                 }
 
                 env.editor.onTextInput(reader.result);
@@ -655,7 +677,7 @@ exports.launch = function(env) {
 
             if(fold) {
                 session.expandFold(fold);
-                selection.setSelectionRange(fold.range)
+                selection.setSelectionRange(fold.range);
             } else if(br) {
                 if(range.compare(br.row,br.column) == 1)
                     range.end = br;
